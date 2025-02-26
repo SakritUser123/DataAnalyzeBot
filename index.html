@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot UI</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 350px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: white;
+      height: 500px;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .input-container {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+
+    #user-input {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    #send-btn {
+      width: 15%;
+      padding: 10px;
+      margin-left: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #send-btn:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    .user-message {
+      background-color: #DCF8C6;
+      align-self: flex-end;
+    }
+
+    .bot-message {
+      background-color: #f1f0f0;
+      align-self: flex-start;
+    }
+
+    /* For demonstration, we will show static messages */
+    .static-messages {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .static-messages .message {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .static-messages .user-message {
+      align-self: flex-end;
+    }
+
+    .static-messages .bot-message {
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-box">
+      <div class="static-messages">
+        <!-- Static Chatbot Messages for Example -->
+        <div class="message user-message">Hello</div>
+        <div class="message bot-message">Hi! How can I assist you today?</div>
+        <div class="message user-message">How are you?</div>
+        <div class="message bot-message">I'm doing great, thank you!</div>
+        <div class="message user-message">Bye</div>
+        <div class="message bot-message">Goodbye! Have a nice day!</div>
+      </div>
+    </div>
+
+    <!-- Static Input Area for UI -->
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type a message..." disabled>
+      <button id="send-btn" disabled>Send</button>
+    </div>
+  </div>
+
+</body>
+</html>
