@@ -102,7 +102,7 @@
 
   <div class="chat-container">
     <div class="chat-box">
-      <div class="static-messages">
+      <div class="static-messages" id="chat-box">
         <!-- Static Chatbot Messages for Example -->
         <div class="message user-message">Hello</div>
         <div class="message bot-message">Hi! How can I assist you today?</div>
@@ -119,6 +119,50 @@
       <button id="send-btn" disabled>Send</button>
     </div>
   </div>
+
+  <script>
+    // Get references to elements
+    from seam.py import decoded_output
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatBox = document.getElementById('chat-box');
+
+    // Enable input and send button after page load
+    window.onload = () => {
+      userInput.disabled = false;
+      sendBtn.disabled = false;
+    };
+
+    // Send button click event handler
+    sendBtn.addEventListener('click', () => {
+      const userMessage = userInput.value.trim();
+      if (userMessage) {
+        // Append user message to chat
+        appendMessage(userMessage, 'user-message');
+        
+        // Simulate bot response (for now a simple echo)
+        setTimeout(() => {
+          const botMessage = `decoded_output`; // Example bot response
+          appendMessage(botMessage, 'bot-message');
+        }, 1000);
+      }
+      userInput.value = ''; // Clear the input field after sending
+    });
+
+    // Function to append a new message to the chat box
+    function appendMessage(message, messageType) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', messageType);
+      messageDiv.textContent = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to the latest message
+    }
+
+    // Enable the Send button when the user starts typing
+    userInput.addEventListener('input', () => {
+      sendBtn.disabled = !userInput.value.trim();
+    });
+  </script>
 
 </body>
 </html>
