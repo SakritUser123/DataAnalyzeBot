@@ -1,5 +1,15 @@
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from flask import Flask, render_template
 
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    
 # Load pre-trained tokenizer and model
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained('gpt2')
