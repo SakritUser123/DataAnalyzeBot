@@ -1,44 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>PyScript 2025.2.4</title>
-        <link rel="stylesheet" href="https://pyscript.net/releases/2025.2.4/core.css" />
-        <script type="module" src="https://pyscript.net/releases/2025.2.4/core.js"></script>
-    </head>
-    <body>
-        <h1>Hello world!</h1>
-        <p>These are the Python interpreters in PyScript 2025.2.4:</p>
-        <script type="py">  
-            import transformers
-            from transformers import GPT2LMHeadModel, GPT2Tokenizer
-            from flask import Flask, render_template
-            
-            
-                
-            # Load pre-trained tokenizer and model
-            tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-            model = GPT2LMHeadModel.from_pretrained('gpt2')
-            
-            # Input text from user
-            inputtext = input("Enter what you want to do with the data: ")
-            
-            # Tokenizing input text
-            inputs = tokenizer(inputtext, return_tensors="pt", truncation=True)
-            
-            # Check if the input text was tokenized properly
-            if inputs['input_ids'].size(1) == 0:
-                print("Error: Tokenized input is empty.")
-            else:
-                # Generate output based on tokenized input
-                outputs = model.generate(inputs['input_ids'], max_length=50,attention_mask=inputs['attention_mask'])
-            
-                # Decode the generated token IDs back to text
-                decoded_output = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                
-                # Print the result
-                print(decoded_output)
-        </script>
-    </body>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Chatbot</title>
+  <style>/* styles.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: red;
+  animation-name: background_change;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+    max-width: 100%;
+    height: auto;;}
+    @keyframes  background_change{
+      0%   {background-color:red;}
+      50%  {background-color:blue;}
+      75%  {background-color:green;}
+      100% {background-color:red;}
+    }
+.chat-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: hsla(0, 96%, 48%, 1);
+
+background: linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+background: -moz-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+background: -webkit-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F20505", endColorstr="#FFFB02", GradientType=1 );
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.chat-box {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+   font-size: 13px;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.bot-message {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+.user-message {
+  background-color: #0078d4;
+  color: white;
+  text-align: right;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+p{
+ 
+}</style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+   <div class="chat-container">
+  <div class="chat-box" id="chat-box">
+    <div class="message bot-message">Hello! I can analyze your emotions based on what you type. How can I help you deal with these emotions?</div>
+    <p>Use this as an emotional conselor, <b>NOT</b> your school counselor or your homework director.</p>
+  </div>
+   <input type="text" id="user-input" placeholder="How do you feel...">
+     <button onclick="predict()">Send</button>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
 </html>
