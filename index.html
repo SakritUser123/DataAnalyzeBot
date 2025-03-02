@@ -34,9 +34,6 @@
         margin: 50px auto;
         background: hsla(0, 96%, 48%, 1);
         background: linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-        background: -moz-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-        background: -webkit-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F20505", endColorstr="#FFFB02", GradientType=1 );
         border-radius: 10px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         padding: 20px;
@@ -89,32 +86,33 @@
    </style>
 </head>
 <body>
-   <br><br><br><br><br><br><br><br><br><br>
    <div class="chat-container">
       <div class="chat-box" id="chat-box">
          <div class="message bot-message">Hello! I can analyze your emotions based on what you type. How can I help you deal with these emotions?</div>
          <p>Use this as an emotional counselor, <b>NOT</b> your school counselor or your homework director.</p>
-         
-         
       </div>
-      <form method="POST" action="/">
-        <input type="text" id="user-input" name="user_input" placeholder="How do you feel..." required>
-        <button type="submit">Submit</button>
-     </form>
-     <html>
-<body>
-    <script>
+
+      <!-- Form for user input -->
+      <form method="POST" action="/" onsubmit="displayMessage(); return false;">
+         <input type="text" id="user-input" name="user_input" placeholder="How do you feel..." required>
+         <button type="submit">Submit</button>
+      </form>
+
+      <!-- Placeholder for dynamic message display -->
+      <div id="message-container"></div>
+
+      <script>
         function displayMessage() {
             const userInput = document.getElementById('user-input').value;
-            const messageElement = document.getElementById('message');
+            const messageElement = document.getElementById('message-container');
 
             // Use ternary operator for short conditional check
-            messageElement.innerHTML = userInput ? `You said: ${user-input}` : 'No input provided.';
-        }
-    </script>
-</body>
-</html>
+            messageElement.innerHTML = userInput ? `<div class="message user-message">You said: ${userInput}</div>` : `<div class="message user-message">No input provided.</div>`;
 
+            // Reset the input field
+            document.getElementById('user-input').value = '';
+        }
+      </script>
    </div>
 </body>
 </html>
