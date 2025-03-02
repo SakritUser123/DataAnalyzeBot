@@ -103,11 +103,15 @@
      </form>
      <html>
 <body>
-   {% if user_input %}
-      <div class="message user-message">You said: {{ user_input }}</div>
-   {% else %}
-      <div class="message user-message">No input provided.</div>
-   {% endif %}
+    <script>
+        function displayMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const messageElement = document.getElementById('message');
+
+            // Use ternary operator for short conditional check
+            messageElement.innerHTML = userInput ? `You said: ${user-input}` : 'No input provided.';
+        }
+    </script>
 </body>
 </html>
 
