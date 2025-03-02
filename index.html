@@ -101,9 +101,16 @@
         <input type="text" id="user-input" name="user_input" placeholder="How do you feel..." required>
         <button type="submit">Submit</button>
      </form>
-     {% if user_input %}
-         <div class="message user-message">You said: {{ user_input }}</div>
-      {% endif %}
+     <html>
+<body>
+   {% if user_input %}
+      <div class="message user-message">You said: {{ user_input }}</div>
+   {% else %}
+      <div class="message user-message">No input provided.</div>
+   {% endif %}
+</body>
+</html>
+
    </div>
 </body>
 </html>
