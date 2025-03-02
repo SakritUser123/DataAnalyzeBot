@@ -2,113 +2,108 @@
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Web App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <title>Chatbot</title>
-  <style>/* styles.css */
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Flask Web App</title>
+   <title>Chatbot</title>
+   <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      body {
+        font-family: Arial, sans-serif;
+        background-color: red;
+        animation-name: background_change;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        max-width: 100%;
+        height: auto;
+      }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: red;
-  animation-name: background_change;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-    max-width: 100%;
-    height: auto;;}
-    @keyframes  background_change{
-      0%   {background-color:red;}
-      50%  {background-color:blue;}
-      75%  {background-color:green;}
-      100% {background-color:red;}
-    }
-.chat-container {
-  max-width: 400px;
-  margin: 50px auto;
-  background: hsla(0, 96%, 48%, 1);
+      @keyframes background_change {
+        0%   {background-color: red;}
+        50%  {background-color: blue;}
+        75%  {background-color: green;}
+        100% {background-color: red;}
+      }
 
-background: linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-background: -moz-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-background: -webkit-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
-filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F20505", endColorstr="#FFFB02", GradientType=1 );
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
+      .chat-container {
+        max-width: 400px;
+        margin: 50px auto;
+        background: hsla(0, 96%, 48%, 1);
+        background: linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+        background: -moz-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+        background: -webkit-linear-gradient(315deg, hsla(0, 96%, 48%, 1) 0%, hsla(59, 100%, 50%, 1) 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F20505", endColorstr="#FFFB02", GradientType=1 );
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
 
-.chat-box {
-  max-height: 400px;
-  overflow-y: auto;
-  margin-bottom: 20px;
-   font-size: 13px;
-}
+      .chat-box {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
 
-.message {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-}
+      .message {
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+      }
 
-.bot-message {
-  background-color: #f0f0f0;
-  text-align: left;
-}
+      .bot-message {
+        background-color: #f0f0f0;
+        text-align: left;
+      }
 
-.user-message {
-  background-color: #0078d4;
-  color: white;
-  text-align: right;
-}
+      .user-message {
+        background-color: #0078d4;
+        color: white;
+        text-align: right;
+      }
 
-input {
-  width: 80%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+      input {
+        width: 80%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
 
-button {
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #0078d4;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+      button {
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #0078d4;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
 
-button:hover {
-  background-color: #005fa3;
-}
-p{
- 
-}</style>
-  <link rel="stylesheet" href="styles.css">
+      button:hover {
+        background-color: #005fa3;
+      }
+   </style>
 </head>
 <body>
-<br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+   <br><br><br><br><br><br><br><br><br><br>
    <div class="chat-container">
-  <div class="chat-box" id="chat-box">
-    <div class="message bot-message">Hello! I can analyze your emotions based on what you type. How can I help you deal with these emotions?</div>
-    <p>Use this as an emotional conselor, <b>NOT</b> your school counselor or your homework director.</p>
-  </div>
-   <input type="text" id="user-input" placeholder="How do you feel...">
-     <button onclick="predict()">Send</button>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      <div class="chat-box" id="chat-box">
+         <div class="message bot-message">Hello! I can analyze your emotions based on what you type. How can I help you deal with these emotions?</div>
+         <p>Use this as an emotional counselor, <b>NOT</b> your school counselor or your homework director.</p>
+         
+         
+      </div>
+      <form method="POST" action="/">
+        <input type="text" id="user-input" name="user_input" placeholder="How do you feel..." required>
+        <button type="submit">Submit</button>
+     </form>
+     {% if user_input %}
+         <div class="message user-message">You said: {{ user_input }}</div>
+      {% endif %}
+   </div>
 </body>
 </html>
