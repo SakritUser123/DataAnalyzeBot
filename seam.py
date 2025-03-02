@@ -11,7 +11,7 @@ def home():
         user_input = request.form.get("user_input")
         print(f"User input: {user_input}")  # For debugging: print user input to terminal
     
-    return render_template("tectoc.html", user_input=user_input)
+    return render_template("index.html", user_input=user_input)
 
 if __name__ == "__main__":
     app.run(debug=True)
