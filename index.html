@@ -2,93 +2,114 @@
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Flask Web App</title>
-   <title>Chatbot</title>
-   <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot for Feelings</title>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      body {
-        font-family: Arial, sans-serif;
-        background-color: black;
-        max-width: 100%;
-        height: auto;
-      }
+body {
+  font-family: Arial, sans-serif;
+  background: hsla(0, 0%, 0%, 1);
+  background: linear-gradient(315deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+  background: -moz-linear-gradient(315deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+  background: -webkit-linear-gradient(315deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#FFFFFF", GradientType=1 );
+}
 
-      @keyframes background_change {
-        0%   {background-color: red;}
-        50%  {background-color: blue;}
-        75%  {background-color: green;}
-        100% {background-color: red;}
-      }
+.chat-box {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+   font-size: 13px;
+   color: black;
+}
 
-      .chat-container {
-        max-width: 800px;
-        margin: 50px auto;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-      }
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
 
-      .chat-box {
-        height: 300px;
-        max-height: 600px;
-        overflow-y: auto;
-        margin-bottom: 20px;
-        font-size: 13px;
-      }
+.bot-message {
+  text-align: left;
+}
 
-      .message {
-        margin-bottom: 15px;
-        padding: 10px;
-        border-radius: 8px;
-        font-size: 14px;
-      }
+.user-message {
+  background-color: #8e8e8e;
+  color: rgb(0, 0, 0);
+  text-align: right;
+  overflow-y: auto;
+}
 
-      .bot-message {
-        background-color: #f0f0f0;
-        text-align: left;
-      }
+input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-      .user-message {
-        background-color: #0078d4;
-        color: white;
-        text-align: right;
-      }
+button {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #8e8e8e;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
 
-      input {
-        width: 90%;   /* Adjust the width of the typing area */
-        padding: 30px;  /* Increased padding to make it taller */
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 32px;  /* Larger font size for typing */
-        height: 50px;  /* Set a height to make the input field taller */
-      }
-      button {
-        padding: 10px;
-        border-radius: 8px;
-        background-color: #0078d4;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #005fa3;
-      }
-   </style>
+button:hover {
+  background-color: #bdbdbd;
+  color: white;
+}
+</style>
 </head>
 <body>
-   <div class="chat-container">
-      <div class="chat-box" id="chat-box">
-         <div class="message bot-message">Hello! I am an Data Anaylzer AI, provide a database schema and I will analyze the data set and graph it if possible!</div>
-         <p>Do not use for malicious purposes<b>NOT</b> to be used for these malicious purposes!</p>
-      </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="chat-box" id="chat-box">
+    <div class="message bot-message">Hello! I can analyze your state of well being both emotionally and phycially based on what you type. How can I help you deal with these emotions?</div>
+    <p>Use this as an emotional conselor and health assistant, <b>NOT</b> your school counselor or your homework director.</p>
+  </div>
 
       <!-- Form for user input -->
       <form method="POST" action="/" onsubmit="displayMessage(); return false;">
