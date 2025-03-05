@@ -105,7 +105,7 @@
             const messageElement = document.getElementById('message-container');
 
             // Use ternary operator for short conditional check
-            messageElement.innerHTML = userInput ? `<div class="message user-message">You said: ${userInput}</div>` : `<div class="message user-message">No input provided.</div>`;
+            messageElement.innerHTML = userInput ? `<div class="message user-message">You said: ${generated_text}</div>` : `<div class="message user-message">No input provided.</div>`;
 
             // Reset the input field
             document.getElementById('user-input').value = '';
