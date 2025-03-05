@@ -28,8 +28,8 @@ def home():
     # Decode and print the output
         generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
         # For debugging: print user input to terminal
-    
-    return render_template("index.html", generated_text=generated_text)
+    return jsonify({"generated_text": generated_text})
+return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
