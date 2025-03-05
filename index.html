@@ -98,18 +98,20 @@
 
       <!-- Placeholder for dynamic message display -->
       <div id="message-container"></div>
-
       <script>
-        function displayMessage() {
-            const userInput = document.getElementById('user-input').value;
-            const messageElement = document.getElementById('message-container');
-
-            // Use ternary operator for short conditional check
-            messageElement.innerHTML = userInput ? `<div class="message user-message">You said: ${user_input}</div>` : `<div class="message user-message">No input provided.</div>`;
-
-            // Reset the input field
-            document.getElementById('user-input').value = '';
-        }
+      fetch('/', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_input: userInput })
+         })
+         .then(response => response.json())
+         .then(data => {
+            const botMessage = document.createElement('div');
+            botMessage.classList.add('message', 'bot-message');
+            botMessage.textContent = "AI: " + data.generated_text; // Show the AI response
+            messageContainer.appendChild(botMessage);
       </script>
    </div>
 </body>
