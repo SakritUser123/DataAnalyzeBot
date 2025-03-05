@@ -1,13 +1,12 @@
 from flask import Flask, render_template,request
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
-# Load pre-trained model and tokenizer
-model_name = "gpt2"
-model = GPT2LMHeadModel.from_pretrained(model_name)
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 
 # Encode input text (prompt)
 
+from tensorflow.keras.layers import TextVectorization
+with open('emotions.pkl', 'rb') as f:
+    loaded_model = pickle.load(f)
+X_test = ["hello"]
+vectorizer = TextVectorization(max_tokens=50,output_mode='int')
 
 app = Flask(__name__)
 
@@ -19,17 +18,27 @@ def home():
     if request.method == "POST":
         user_input = request.form.get("user_input")
         print(f"User input: {user_input}")
-        input_text = user_input
-        inputs = tokenizer(input_text, return_tensors="pt")
+        X_test = user_input
+        vectorizer.adapt(X_test)
+        vectorized_texts = vectorizer(X_test)
+        
+        predictions = loaded_model.predict(vectorized_texts)
+        print(predictions)
+        threshold = 0.25
+        bin = (predictions >= threshold).astype(int)
+        labels_text = ['positive' if label == 1 else 'negative' for label in bin.flatten()]
+        print(labels_text)
+
+        
 
     # Generate text from the model
-        output = model.generate(inputs['input_ids'], max_length=50, num_return_sequences=1, no_repeat_ngram_size=2, top_p=0.95, temperature=0.7)
+        
 
     # Decode and print the output
-        generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+        
         # For debugging: print user input to terminal
-        return jsonify({"generated_text": generated_text})
-    return render_template("index.html",generated_text=generated_text)
+        return jsonify({"generated_text": labels_text})
+    return render_template("index.html",labels_text=labels_text)
 
 if __name__ == "__main__":
     app.run(debug=True)
