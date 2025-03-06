@@ -112,28 +112,45 @@ button:hover {
   </div>
 
       <!-- Form for user input -->
-      <form method="POST" action="/" onsubmit="displayMessage(); return false;">
+      <form method="POST" action="/">
          <input type="text" id="user-input" name="user_input" placeholder="How do you feel..." required>
          <button type="submit">➡️</button>
       </form>
-
+      
+        
+      
       <!-- Placeholder for dynamic message display -->
       <div id="message-container"></div>
       <script>
-      fetch('/', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_input: userInput })
-         })
-         .then(response => response.json())
-         .then(data => {
-            const botMessage = document.createElement('div');
-            botMessage.classList.add('message', 'bot-message');
-            botMessage.textContent = "AI: " + data.generated_text; // Show the AI response
-            messageContainer.appendChild(botMessage);
+      form.onsubmit = async function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const userInput = input.value; // Get user input
+
+      // Make the POST request with the input data
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          'user_input': userInput
+        })
+      });
+
+      const data = await response.text(); // Get response text (HTML)
+
+      // Update the chatbox with the new response
+      document.getElementById('chat-box').innerHTML += '<div class="message bot-message">AI: ' + data + '</div>';
+      input.value = ''; // Clear the input after sending
+};
+
       </script>
    </div>
+   {% if labels_text %}
+          <div class="message bot-message">
+            AI: The sentiment is: {{ labels_text}}
+          </div>
+        {% endif %}
 </body>
 </html>
