@@ -27,6 +27,7 @@ def home():
         bin = (predictions >= threshold).astype(int)
         labels_text = ['positive' if label == 1 else 'negative' for label in bin.flatten()]
         print(labels_text)
+        return labels_text
 
 if __name__ == "__main__":
     app.run(debug=True)
